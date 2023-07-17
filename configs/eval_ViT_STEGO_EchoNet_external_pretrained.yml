@@ -1,0 +1,33 @@
+# General setting
+seed: 1
+plot_hist: True
+
+# Dataset parameters
+dataset: 
+    name: "EchoNet_Dynamic"
+    split: "test"
+
+# Dataloader parameters
+dataloader: 
+    batch_size: 2
+    resize_size: 224
+
+# Backend
+backend:
+    patch_size: 8
+
+# Head
+head:
+    name: "STEGO_like"
+    num_classes: 64
+
+# Segmentation
+segmentation:
+    name: "StarlitSky"
+    num_tracings_per_pixel: 0.8
+    parameters: 
+        closing_radius: 10
+        enclave_below_num_labels: 8
+        active_contour: { 'beta' : 0.2, 'gamma' : 0.01, 'max_num_iter' : 10, 'w_edge' : 1 }
+    transforms: 
+        - {name: "SpatialMedianFilter", "radius": 3}

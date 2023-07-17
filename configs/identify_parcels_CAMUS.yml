@@ -1,0 +1,41 @@
+# General setting
+seed: 1
+
+# Settings for left-ventricle
+interior: 
+    overlap: 0.75 # Amount it needs to overlap with left-ventricle (copmared to its total area) to be considered as "inside"
+    minimum_pixels: 10 # Minimum amount of pixels in a connected region of a parcel allowed to call identify it as an interior parcel
+# Settings for exterior of left-ventricle
+    minimum_segment_ratio: 0.02 # Minimum amount of the area of the segment that it has to make up
+    population_fraction: 0.3 # Ratio of total frames in dataset in which parcel is overlapping enough with left-ventricle
+    present_fraction: 0.5 # Ratio of times it is inside left-ventricle of total times the parcel is present in dataset. (Be careful, one connected region of the parcel has the risk of being outside making the parcel "present")
+exterior: 
+    overlap: 0.95 # Amount of not overlapping with left-ventricle
+    population_fraction: 0.1 # Ratio of total frames in dataset in which parcel is not overlapping left-ventricle
+    present_fraction: 0.98 # Ratio of times it is outside of left-ventricle of total times the parcel is present in dataset.
+# Settings for valves
+valve: 
+    population_fraction: 0.3 # Amount of total frames in dataset in which valve is identified
+    present_fraction: 0.2 # Amount of times it is identified of total times the parcel is present in dataset.
+
+# Dataset
+dataset: 
+    name: "CAMUS"
+    split: "train"
+    target_type:
+        - "ESILVTrace"
+        - "EDILVTrace"
+
+# Dataloader parameters
+dataloader:
+    batch_size: 10
+    resize_size: 112
+
+# Backend
+backend:
+    patch_size: 4
+
+# Head
+head:
+    name: "STEGO_like"
+    num_classes: 64
